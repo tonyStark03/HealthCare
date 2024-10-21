@@ -11,3 +11,8 @@ export interface SpecialitiesInterface{
 
 }
 
+export interface ClinicConsultationInterface{
+    img : string
+    title: String
+    text: String
+}
