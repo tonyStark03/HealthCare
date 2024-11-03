@@ -17,7 +17,7 @@ export default function ClinicConsultation(){
         </>
     )
 }
-
+ 
 function Card({img, title, text}:ClinicConsultationInterface){
     return(
         <>
