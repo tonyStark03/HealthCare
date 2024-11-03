@@ -4,6 +4,7 @@ const router = Express.Router();
 import {PrismaClient} from '@prisma/client';
 import jwt from "jsonwebtoken"
 import * as dotenv from "dotenv";
+import Authmiddleware from "../middleware"
 
 dotenv.config();
 const secret:string =  process.env.JWT_SECRET || ""; // Provide a default value for JWT_SECRET BADWAY!!!!
@@ -65,7 +66,7 @@ router.post("/signup", async(req:Request, res:Response)=>{
         gmail: Zod.string().email(),
         password: Zod.string().min(6)
    })
-   router.post("/signin", async(req:Request, res:Response)=>{
+   router.post("/signin",Authmiddleware, async(req:Request, res:Response)=>{
     const {success}  =SigninBody.safeParse(req.body);
     if(!success){
         res.status(400).json({

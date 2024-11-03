@@ -1,24 +1,28 @@
+import { BrowserRouter as Router, Route, BrowserRouter, Routes } from "react-router-dom"
 
-// import './App.css'
-import Cards from './dashboardComp/Card'
-import ClinicConsultation from './dashboardComp/ClinicConsultation'
-import Navbar from './dashboardComp/Navbar'
-import SearchBar from './dashboardComp/SearchBar'
-import Specialities from './dashboardComp/Specialities'
+import Dashboard from "./dashboardComp/Dashboard"
+import Navbar from "./dashboardComp/Navbar"
+import Register from "./dashboardComp/Login/Register"
+import Login from "./dashboardComp/Login/Login"
+
 
 function App() {
 
 
   return (
     <>
-    <div className="">
-        <div className="bg-slate-50"><Navbar/></div>
-        <div className="border-t-2"></div>
-        <div className=""><SearchBar/></div>
-        <div className=""><Cards/></div>
-        <div className="w-screen h-[353px] mt-20"><Specialities/></div>
-        <div className="w-screen h-[349px] mt-[30px]"><ClinicConsultation/></div>
-    </div>
+    <BrowserRouter>  
+      <div className="bg-slate-50"><Navbar/></div>
+      <div className="border"></div>
+      <Routes>
+        <Route path="Dashboard" element={<Dashboard/>}/>
+        {/* <Route path="Register" element={<Register/>}/> */}
+        <Route path="Login" element={<Login/>}/>
+      </Routes>
+      
+    </BrowserRouter>
+
+    
 
     </>
   )

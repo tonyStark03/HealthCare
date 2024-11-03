@@ -41,25 +41,28 @@ const router = express_1.default.Router();
 const client_1 = require("@prisma/client");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv = __importStar(require("dotenv"));
+const middleware_1 = __importDefault(require("../middleware"));
 dotenv.config();
-const secret = process.env.JWT_SECRET;
+const secret = process.env.JWT_SECRET || ""; // Provide a default value for JWT_SECRET BADWAY!!!!
 console.log(secret);
 const prisma = new client_1.PrismaClient();
 router.get("/", (req, res) => {
     res.send("User route");
 });
 const SignupBody = zod_1.default.object({
-    gmail: zod_1.default.string().email(),
+    email: zod_1.default.string().email(),
     name: zod_1.default.string(),
-    phone: zod_1.default.number().max(10),
+    phone: zod_1.default.string().length(10),
     password: zod_1.default.string().min(6),
     city: zod_1.default.string()
 });
 router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { success } = SignupBody.safeParse(req.body);
-    if (!success) {
+    const result = SignupBody.safeParse(req.body);
+    if (!result.success) {
+        console.log(result.error.errors);
         return res.status(400).json({
-            message: "Incorrect Input"
+            message: "Incorrect Inputs",
+            errors: result.error.errors
         });
     }
     const existingUser = yield prisma.user.findUnique({
@@ -83,5 +86,36 @@ router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function*
         }
     });
     const token = jsonwebtoken_1.default.sign({ id: user.id }, secret);
+    res.status(200).json({
+        message: "User Created",
+        token
+    });
+}));
+const SigninBody = zod_1.default.object({
+    email: zod_1.default.string().email(),
+    password: zod_1.default.string().min(6)
+});
+router.post("/signin", middleware_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { success } = SigninBody.safeParse(req.body);
+    if (!success) {
+        res.status(400).json({
+            message: "incorrect input"
+        });
+    }
+    const existingUser = yield prisma.user.findUnique({
+        where: {
+            email: req.body.email,
+            password: req.body.password
+        }
+    });
+    if (!existingUser) {
+        return res.status(411).json({
+            message: "Incorrect details"
+        });
+    }
+    const token = jsonwebtoken_1.default.sign({ id: existingUser.id }, secret);
+    return res.status(200).json({
+        token
+    });
 }));
 exports.default = router;

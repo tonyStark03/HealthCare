@@ -18,7 +18,7 @@ model User {
   id                   Int           @id @default(autoincrement())
   email                String        @unique
   name                 String
-  phone                Int           @unique
+  phone                String           @unique
   password             String
   city                 String
   // doctor               Doctor?       // Optional relation, if the user is a doctor
@@ -30,7 +30,7 @@ model Doctor {
   id                   Int           @id @default(autoincrement())
   name                 String
   email                String        @unique
-  phone                Int           @unique
+  phone                String           @unique
   // userID               Int           @unique
   // user                 User          @relation(fields: [userID], references: [id])
   city                 String
@@ -41,7 +41,7 @@ model Doctor {
 
 model Appointment {
   id        Int      @id @default(autoincrement())
-  date      DateTime
+  date      DateTime  
   status    Status   @default(PENDING)
   patientID Int
   doctorID  Int

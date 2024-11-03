@@ -4,6 +4,7 @@ const router = Express.Router();
 import {PrismaClient} from '@prisma/client';
 import jwt from "jsonwebtoken"
 import * as dotenv from "dotenv";
+import Authmiddleware from "../middleware"
 
 dotenv.config();
 const secret:string =  process.env.JWT_SECRET || ""; // Provide a default value for JWT_SECRET BADWAY!!!!
@@ -15,19 +16,22 @@ router.get("/", (req:Request, res:Response)=>{
 })
 
 const SignupBody = Zod.object({
-    gmail: Zod.string().email(),
+    email: Zod.string().email(),
     name: Zod.string(),
-    phone: Zod.number().max(10),
+    phone: Zod.string().length(10),
     password: Zod.string().min(6),
     city: Zod.string()
 })
 
 router.post("/signup", async(req:Request, res:Response)=>{
 
-   const {success} = SignupBody.safeParse(req.body);
-   if(!success){
+   const result = SignupBody.safeParse(req.body);
+   if(!result.success){
+    console.log(result.error.errors)
     return  res.status(400).json({
-        message: "Incorrect Input"
+        message: "Incorrect Inputs",
+        errors: result.error.errors
+        
     })
    }
    const existingUser = await prisma.user.findUnique({
@@ -61,10 +65,10 @@ router.post("/signup", async(req:Request, res:Response)=>{
 
 })
    const SigninBody = Zod.object({
-        gmail: Zod.string().email(),
+        email: Zod.string().email(),
         password: Zod.string().min(6)
    })
-   router.post("/signin", async(req:Request, res:Response)=>{
+   router.post("/signin",Authmiddleware, async(req:Request, res:Response)=>{
     const {success}  =SigninBody.safeParse(req.body);
     if(!success){
         res.status(400).json({
@@ -73,7 +77,7 @@ router.post("/signup", async(req:Request, res:Response)=>{
     }
     const existingUser = await prisma.user.findUnique({
         where:{
-            email: req.body.gmail,
+            email: req.body.email,
             password: req.body.password
         }
     })
