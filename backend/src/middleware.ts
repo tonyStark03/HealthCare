@@ -10,9 +10,20 @@ const Authmiddleware = (req:Request,res:Response, next:NextFunction)=>{
     if(!header || header.startsWith("Bearer ")){
         return res.status(403).json({
             message:"Authorization falied"
+
         })
     }
-    
+    const token = header.split(" ")[1];
+    try{
+        const user = jwt.verify(token,secret);
+        req.body.user = user;
+        next();
+    }
+    catch(err){
+        return res.status(403).json({
+            message:"token authentication failed"
+        })
+        }
 
 }
 export default Authmiddleware;

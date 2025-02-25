@@ -1,5 +1,6 @@
-
+import { useNavigate } from "react-router-dom"
 function Navbar(){
+    const navigate = useNavigate();
     return(
         <>    
             <div className="hidden md:flex md:justify-between  md:items-center 2xl:mx-auto h-16 2xl:w-4/6  sm:px-12 px-2.5">
@@ -17,14 +18,11 @@ function Navbar(){
                     <div className="mr-5">For Corporates</div>
                     <div className="mr-5">For Providers</div>
                     <div className="mr-5">Security & help</div>
-                    <div className="mr-5">Login/Signup</div>
+                    <button className="mr-5 cursor-pointer border px-2 border-blue-400" onClick={() => { navigate("/login") }}>Login/Signup</button>
                 </div>
                 
             </div>
-            <div className="flex justify-between text-lg px-10 items-center h-16 md:hidden">
-                <div className="">Practro</div>
-                <div className="">login</div>
-            </div>
+
           
         
         </>

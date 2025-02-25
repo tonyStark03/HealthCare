@@ -68,6 +68,8 @@ router.post("/signup", async(req:Request, res:Response)=>{
         email: Zod.string().email(),
         password: Zod.string().min(6)
    })
+
+
    router.post("/signin",Authmiddleware, async(req:Request, res:Response)=>{
     const {success}  =SigninBody.safeParse(req.body);
     if(!success){
@@ -93,6 +95,11 @@ router.post("/signup", async(req:Request, res:Response)=>{
     })
 })
 
+
+
+// router.post("/SearchCity" async(req:Request, res:Response)=>{
+//     const 
+// })
 
 
 export default router;
