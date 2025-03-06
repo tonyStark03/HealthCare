@@ -70,7 +70,7 @@ router.post("/signup", async(req:Request, res:Response)=>{
    })
 
 
-   router.post("/signin",Authmiddleware, async(req:Request, res:Response)=>{
+   router.post("/signin", async(req:Request, res:Response)=>{
     const {success}  =SigninBody.safeParse(req.body);
     if(!success){
         res.status(400).json({
@@ -93,6 +93,29 @@ router.post("/signup", async(req:Request, res:Response)=>{
     return res.status(200).json({
         token
     })
+})
+
+router.post("/validate-token", async(req:Request, res:Response)=>{
+    const header = req.body.isAuth;
+    if(!header || !header.startsWith("Bearer ")){
+        return res.status(403).json({
+            message: "Token not provided"
+        })
+    }
+    const token = header.split(" ")[1];
+
+    try{
+        const user = jwt.verify(token, secret);
+        return res.status(200).json({
+            message: "Valid Token"
+        })
+
+    }
+    catch(e){
+        return res.status(403).json({
+            message: "Invalid Token"
+        })
+    }
 })
 
 

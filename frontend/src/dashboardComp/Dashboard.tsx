@@ -7,7 +7,7 @@ import Specialities from './Specialities'
 function Dashboard() {
   return (
     <>
-      <div className="bg-slate-50"><Navbar/></div>
+      {/* <div className="bg-slate-50"><Navbar/></div> */}
       <div>
           
           <div className="border-t-2"></div>

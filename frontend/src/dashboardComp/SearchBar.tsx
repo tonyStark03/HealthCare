@@ -12,7 +12,10 @@ function SearchBar(){
     const fetchCitySuggestion = async(city:string)=>{
 
     
-        if(city.length <2) return
+        if(city.length <2){
+            setSuggestions([]);
+            return;
+        }
         try{
             const response = await fetch(`https://nominatim.openstreetmap.org/search?city=${city}&format=json`);
             const data = await response.json();
@@ -22,10 +25,12 @@ function SearchBar(){
                 display_name: item.display_name
             })));
             // console.log(suggestions)
+        
         }
         catch(e){
             console.log(e);
         }
+
     }
 
 
@@ -45,7 +50,9 @@ function SearchBar(){
                                 <div className="mb-1">{suggestion.name}</div>
                                 <div className="font-light text-sm pb-1">{suggestion.display_name}</div>
                             </li>)}
-                        </ul>) }
+                        </ul>) 
+                        
+                    }
                 </div>
                 
                 

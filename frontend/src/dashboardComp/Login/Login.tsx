@@ -56,11 +56,11 @@ const Login = () => {
         {/* Login Button */}
         <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600" 
         onClick={()=>{
-            axios.post("http://localhost:3000/api/v1/user/login",{email:email,password: password}).then((responses)=>{
-                localStorage.setItem("token",responses.data.token)
-                Navigate("/dashboard")
-            }).catch(()=>{
-                alert("invalid credentials")
+            axios.post("http://localhost:3000/api/v1/user/signin",{email:email,password: password}).then((responses)=>{
+                localStorage.setItem("token","Bearer " + responses.data.token)
+                Navigate("/")
+            }).catch((e)=>{
+                alert(e.response.data.message)
             })
           }}>
           Login

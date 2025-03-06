@@ -41,7 +41,6 @@ const router = express_1.default.Router();
 const client_1 = require("@prisma/client");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv = __importStar(require("dotenv"));
-const middleware_1 = __importDefault(require("../middleware"));
 dotenv.config();
 const secret = process.env.JWT_SECRET || ""; // Provide a default value for JWT_SECRET BADWAY!!!!
 console.log(secret);
@@ -95,7 +94,7 @@ const SigninBody = zod_1.default.object({
     email: zod_1.default.string().email(),
     password: zod_1.default.string().min(6)
 });
-router.post("/signin", middleware_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post("/signin", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { success } = SigninBody.safeParse(req.body);
     if (!success) {
         res.status(400).json({
@@ -118,4 +117,27 @@ router.post("/signin", middleware_1.default, (req, res) => __awaiter(void 0, voi
         token
     });
 }));
+router.post("/validate-token", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const header = req.body.isAuth;
+    if (!header || !header.startsWith("Bearer ")) {
+        return res.status(403).json({
+            message: "Token not provided"
+        });
+    }
+    const token = header.split(" ")[1];
+    try {
+        const user = jsonwebtoken_1.default.verify(token, secret);
+        return res.status(200).json({
+            message: "Valid Token"
+        });
+    }
+    catch (e) {
+        return res.status(403).json({
+            message: "Invalid Token"
+        });
+    }
+}));
+// router.post("/SearchCity" async(req:Request, res:Response)=>{
+//     const 
+// })
 exports.default = router;

@@ -1,18 +1,18 @@
 export interface cardInterface{
-    title:String;
-    text: String;
+    title:string;
+    text: string;
     img: string
     style:string
 }
 
 export interface SpecialitiesInterface{
-    title:String;
+    title:string;
     img: string
 
 }
 
 export interface ClinicConsultationInterface{
     img : string
-    title: String
-    text: String
+    title: string
+    text: string
 }
