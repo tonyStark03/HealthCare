@@ -51,7 +51,14 @@ router.post("/signup", async(req:Request, res:Response)=>{
         phone: req.body.phone,
         city: req.body.city,
         password: req.body.password,
-        field: req.body.field
+        field: req.body.field,
+        experience: req.body.experience,
+        fees: req.body.fees,
+        rating: req.body.rating,
+        reviews: req.body.reviews,
+        image: req.body.image
+
+
     }
    })
    

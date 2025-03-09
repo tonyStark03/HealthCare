@@ -10,7 +10,7 @@ function Dashboard() {
       {/* <div className="bg-slate-50"><Navbar/></div> */}
       <div>
           
-          <div className="border-t-2"></div>
+          
           <div className=""><SearchBar/></div>
           <div className=""><Cards/></div>
           <div className="w-screen h-[353px] mt-20"><Specialities/></div>

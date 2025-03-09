@@ -36,6 +36,11 @@ model Doctor {
   city                 String
   field                String
   password             String
+  fees                 Int
+  experience           Int
+  rating               Float
+  reviews              String[]
+  image                String
   appointmentsReceived Appointment[] @relation("DoctorAppointments")
 }
 

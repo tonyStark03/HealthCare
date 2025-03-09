@@ -1,0 +1,98 @@
+{
+    "specialties": [
+      {
+        "category": "Primary Care & General Medicine",
+        "fields": ["General Medicine", "Family Medicine", "Internal Medicine"]
+      },
+      {
+        "category": "Surgical Specialties",
+        "fields": [
+          "General Surgery",
+          "Cardiothoracic Surgery",
+          "Neurosurgery",
+          "Orthopedic Surgery",
+          "Plastic & Reconstructive Surgery",
+          "Urology",
+          "Vascular Surgery",
+          "Colorectal Surgery"
+        ]
+      },
+      {
+        "category": "Cardiology & Vascular Health",
+        "fields": ["Cardiology", "Interventional Cardiology", "Vascular Medicine"]
+      },
+      {
+        "category": "Neurology & Brain Health",
+        "fields": ["Neurology", "Neurosurgery", "Stroke & Neurovascular Medicine"]
+      },
+      {
+        "category": "Cancer & Oncology",
+        "fields": ["Medical Oncology", "Radiation Oncology", "Surgical Oncology", "Hematology-Oncology"]
+      },
+      {
+        "category": "Pediatric Specialties",
+        "fields": ["Pediatrics", "Pediatric Cardiology", "Pediatric Neurology", "Pediatric Surgery", "Neonatology"]
+      },
+      {
+        "category": "Women's Health & Gynecology",
+        "fields": ["Obstetrics & Gynecology (OB-GYN)", "Maternal-Fetal Medicine", "Gynecologic Oncology", "Reproductive Endocrinology"]
+      },
+      {
+        "category": "Ear, Nose & Throat (ENT)",
+        "fields": ["Otolaryngology", "Audiology", "Head & Neck Surgery"]
+      },
+      {
+        "category": "Eye & Vision Health",
+        "fields": ["Ophthalmology", "Optometry", "Retina & Corneal Specialists"]
+      },
+      {
+        "category": "Endocrinology & Metabolic Health",
+        "fields": ["Endocrinology", "Diabetology", "Thyroid Disorders"]
+      },
+      {
+        "category": "Digestive System & Gastroenterology",
+        "fields": ["Gastroenterology", "Hepatology (Liver)", "Colorectal Surgery"]
+      },
+      {
+        "category": "Kidney & Urinary System",
+        "fields": ["Nephrology", "Urology", "Kidney Transplant"]
+      },
+      {
+        "category": "Respiratory & Lung Health",
+        "fields": ["Pulmonology", "Respiratory Medicine", "Sleep Medicine"]
+      },
+      {
+        "category": "Bone, Joint & Muscle Health",
+        "fields": ["Orthopedics", "Rheumatology", "Sports Medicine", "Physiotherapy"]
+      },
+      {
+        "category": "Skin & Dermatology",
+        "fields": ["Dermatology", "Cosmetology", "Trichology (Hair & Scalp)"]
+      },
+      {
+        "category": "Psychiatry & Mental Health",
+        "fields": ["Psychiatry", "Clinical Psychology", "Addiction Medicine"]
+      },
+      {
+        "category": "Geriatrics & Aging Health",
+        "fields": ["Geriatrics", "Palliative Care"]
+      },
+      {
+        "category": "Emergency & Trauma",
+        "fields": ["Emergency Medicine", "Critical Care Medicine", "Trauma Surgery"]
+      },
+      {
+        "category": "Anesthesia & Pain Management",
+        "fields": ["Anesthesiology", "Pain Medicine"]
+      },
+      {
+        "category": "Infectious Diseases",
+        "fields": ["Virology", "Immunology", "Tropical Medicine"]
+      },
+      {
+        "category": "Rehabilitation & Physical Medicine",
+        "fields": ["Physical Medicine & Rehabilitation", "Occupational Therapy", "Speech Therapy"]
+      }
+    ]
+  }
+  

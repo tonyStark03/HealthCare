@@ -119,10 +119,35 @@ router.post("/validate-token", async(req:Request, res:Response)=>{
 })
 
 
+router.get("/specialities", async(req:Request, res:Response)=>{
+    const query = req.query.items as string;
+    if (!query || typeof query !== "string") {
+        return res.status(400).json({ error: "Speciality query parameter is required" });
+    }
 
-// router.post("/SearchCity" async(req:Request, res:Response)=>{
-//     const 
-// })
+        try{
+            const doctor = await prisma.doctor.findMany({
+            where:{
+                field : { contains: query, mode: "insensitive" } 
+            }
+        })
+        res.status(200).json(
+            doctor.map((doc)=>({
+                name: doc.name,
+                image: doc.image,
+                field: doc.field,
+                experience: doc.experience,
+                city: doc.city,
+                fees: doc.fees,
+                rating: doc.rating,
+                reviews: doc.reviews
+            }))
+        )
+    }catch(e){
+        console.error("Error fetching doctors:", e);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+})
 
 
 export default router;

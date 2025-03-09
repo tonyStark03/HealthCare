@@ -81,7 +81,12 @@ router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function*
             phone: req.body.phone,
             city: req.body.city,
             password: req.body.password,
-            field: req.body.field
+            field: req.body.field,
+            experience: req.body.experience,
+            fees: req.body.fees,
+            rating: req.body.rating,
+            reviews: req.body.reviews,
+            image: req.body.image
         }
     });
     const token = jsonwebtoken_1.default.sign({ id: user.id }, secret);

@@ -16,3 +16,14 @@ export interface ClinicConsultationInterface{
     title: string
     text: string
 }
+
+export interface Doctors{
+    name: string;
+    image: string;
+    field: string;
+    experience: string;
+    city: string;
+    fees: number;
+    rating: string;
+    reviews: string;
+}

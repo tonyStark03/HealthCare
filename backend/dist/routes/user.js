@@ -137,7 +137,31 @@ router.post("/validate-token", (req, res) => __awaiter(void 0, void 0, void 0, f
         });
     }
 }));
-// router.post("/SearchCity" async(req:Request, res:Response)=>{
-//     const 
-// })
+router.get("/specialities", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = req.query.items;
+    if (!query || typeof query !== "string") {
+        return res.status(400).json({ error: "Speciality query parameter is required" });
+    }
+    try {
+        const doctor = yield prisma.doctor.findMany({
+            where: {
+                field: { contains: query, mode: "insensitive" }
+            }
+        });
+        res.status(200).json(doctor.map((doc) => ({
+            name: doc.name,
+            image: doc.image,
+            field: doc.field,
+            experience: doc.experience,
+            city: doc.city,
+            fees: doc.fees,
+            rating: doc.rating,
+            reviews: doc.reviews
+        })));
+    }
+    catch (e) {
+        console.error("Error fetching doctors:", e);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}));
 exports.default = router;
